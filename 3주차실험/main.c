@@ -45,24 +45,19 @@ int main(void)
   {
     if(~(*PORT_C_IDR) & 0x04) // C포트 2번 핀 입력받을 경우 DOWN
     {
-        *PORT_D_SRR |= 0x04; // D포트 2번 핀 출력
+      *PORT_D_SRR = (0x04 | 0x08); // D포트 2, 3번 핀 ON
     }
     else if(~(*PORT_C_IDR) & 0x08) // C포트 3번 핀 입력받을 경우 LEFT
     {
-      *PORT_D_SRR |= 0x08; // D포트 3번 핀 출력
+      *PORT_D_SRR = (0x10 | 0x80)<<16; // D포트 4, 7번 핀 OFF
     }
     else if(~(*PORT_C_IDR) & 0x10) // C포트 4번 핀 입력받을 경우 RIGHT
     {
-      *PORT_D_SRR |= 0x10; // D포트 4번 핀 출력
+      *PORT_D_SRR = (0x04 | 0x08)<<16; // D포트 2, 3번 핀 OFF
     }
     else if(~(*PORT_C_IDR) & 0x20) // C포트 5번 핀 입력받을 경우 UP
     {
-      *PORT_D_SRR |= 0x80; // D포트 7번 핀 출력
-    }
-    else
-    {
-      *PORT_D_SRR = 0xFFFF0000; // C포트 입력 없을 경우 D 포트 리셋
-      *PORT_D_SRR = 0x00000000;
+      *PORT_D_SRR = (0x10 | 0x80); // D포트 4, 7번 핀 ON
     }
   }
   
