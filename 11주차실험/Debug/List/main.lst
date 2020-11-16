@@ -1,0 +1,756 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V8.22.1.15669/W32 for ARM       09/Nov/2020  19:35:47
+# Copyright 1999-2018 IAR Systems AB.
+#
+#    Cpu mode     =  thumb
+#    Endian       =  little
+#    Source file  =  C:\Users\Team06\Desktop\@ @@\user\main.c
+#    Command line =  
+#        -f C:\Users\Team06\AppData\Local\Temp\EWD6C6.tmp
+#        ("C:\Users\Team06\Desktop\@ @@\user\main.c" -D
+#        USE_STDPERIPH_DRIVER -D STM32F10X_CL -lC "C:\Users\Team06\Desktop\@
+#        @@\Debug\List" -o "C:\Users\Team06\Desktop\@ @@\Debug\Obj"
+#        --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa
+#        --no_clustering --no_scheduling --debug --endian=little
+#        --cpu=Cortex-M3 -e --fpu=None --dlib_config "C:\Program Files
+#        (x86)\IAR Systems\Embedded Workbench
+#        8.0\arm\INC\c\DLib_Config_Normal.h" -I "C:\Users\Team06\Desktop\@
+#        @@\libraries\CMSIS\DeviceSupport\" -I "C:\Users\Team06\Desktop\@
+#        @@\libraries\CMSIS\DeviceSupport\Startup\" -I
+#        "C:\Users\Team06\Desktop\@
+#        @@\libraries\STM32F10x_StdPeriph_Driver_v3.5\inc\" -I
+#        "C:\Users\Team06\Desktop\@
+#        @@\libraries\STM32F10x_StdPeriph_Driver_v3.5\src\" -I
+#        "C:\Users\Team06\Desktop\@ @@\libraries\LCD\" -I
+#        "C:\Users\Team06\Desktop\@ @@\user\" -I
+#        "C:\Users\Team06\Desktop\@ @@\user\inc\" -Ol -I "C:\Program
+#        Files (x86)\IAR Systems\Embedded Workbench
+#        8.0\arm\CMSIS\Core\Include\" -I "C:\Program Files (x86)\IAR
+#        Systems\Embedded Workbench 8.0\arm\CMSIS\DSP\Include\")
+#    Locale       =  C
+#    List file    =  C:\Users\Team06\Desktop\@ @@\Debug\List\main.lst
+#    Object file  =  C:\Users\Team06\Desktop\@ @@\Debug\Obj\main.o
+#
+###############################################################################
+
+C:\Users\Team06\Desktop\@ @@\user\main.c
+      1          #include "stm32f10x.h"
+      2          #include "core_cm3.h"
+      3          #include "misc.h"
+      4          #include "stm32f10x_gpio.h"
+      5          #include "stm32f10x_rcc.h"
+      6          #include "stm32f10x_usart.h"
+      7          #include "stm32f10x_adc.h"
+      8          #include "lcd.h"
+      9          #include "touch.h"
+     10          
+
+   \                                 In section .bss, align 2
+     11          uint16_t value;
+   \                     value:
+   \   00000000                      DS8 2
+
+   \                                 In section .data, align 4
+     12          int color[12] = {WHITE, CYAN, BLUE, RED, MAGENTA, LGRAY, GREEN, YELLOW, BROWN, BRRED, GRAY};
+   \                     color:
+   \   00000000   0x0000FFFF         DC32 65535, 32767, 31, 63488, 63519, 50712, 2016, 65504, 48192, 64519
+   \              0x00007FFF   
+   \              0x0000001F   
+   \              0x0000F800   
+   \              0x0000F81F   
+   \              0x0000C618   
+   \              0x000007E0   
+   \              0x0000FFE0   
+   \              0x0000BC40   
+   \              0x0000FC07   
+   \   00000028   0x00008430         DC32 33840
+   \   0000002C   0x00 0x00          DC8 0, 0, 0, 0
+   \              0x00 0x00    
+
+   \                                 In section .data, align 4
+     13          char team[] = "MON_Team07";
+   \                     team:
+   \   00000000   0x4D 0x4F          DC8 "MON_Team07"
+   \              0x4E 0x5F    
+   \              0x54 0x65    
+   \              0x61 0x6D    
+   \              0x30 0x37    
+   \              0x00         
+   \   0000000B   0x00               DC8 0
+
+   \                                 In section .data, align 4
+     14          char ON[] = "ON  ";
+   \                     ON:
+   \   00000000   0x4F 0x4E          DC8 "ON  "
+   \              0x20 0x20    
+   \              0x00         
+   \   00000005   0x00 0x00          DC8 0, 0, 0
+   \              0x00         
+
+   \                                 In section .data, align 4
+     15          char OFF[] = "OFF";
+   \                     OFF:
+   \   00000000   0x4F 0x46          DC8 "OFF"
+   \              0x46 0x00    
+
+   \                                 In section .data, align 4
+     16          char BUT[] = "BUT";
+   \                     BUT:
+   \   00000000   0x42 0x55          DC8 "BUT"
+   \              0x54 0x00    
+
+   \                                 In section .bss, align 2
+     17          u16 PosX;
+   \                     PosX:
+   \   00000000                      DS8 2
+
+   \                                 In section .bss, align 2
+     18          u16 PosY;
+   \                     PosY:
+   \   00000000                      DS8 2
+
+   \                                 In section .bss, align 4
+     19          int LED1, LED2;
+   \                     LED1:
+   \   00000000                      DS8 4
+
+   \                                 In section .bss, align 4
+   \                     LED2:
+   \   00000000                      DS8 4
+
+   \                                 In section .bss, align 4
+     20          int LEDs_TOGGLE;
+   \                     LEDs_TOGGLE:
+   \   00000000                      DS8 4
+
+   \                                 In section .bss, align 4
+     21          int cnt;
+   \                     cnt:
+   \   00000000                      DS8 4
+     22          
+     23          /* function prototype */
+     24          void RCC_Configure(void);
+     25          void GPIO_Configure(void);
+     26          void TIM_Configure(void);
+     27          void NVIC_Configure(void);
+     28          
+     29          //---------------------------------------------------------------------------------------------------
+     30          
+
+   \                                 In section .text, align 2, keep-with-next
+     31          void RCC_Configure(void)
+     32          {
+   \                     RCC_Configure: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+     33              // TODO: Enable the APB2 peripheral clock using the function 'RCC_APB2PeriphClockCmd'
+     34              RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA,ENABLE);
+   \   00000002   0x2101             MOVS     R1,#+1
+   \   00000004   0x2004             MOVS     R0,#+4
+   \   00000006   0x.... 0x....      BL       RCC_APB2PeriphClockCmd
+     35              RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC,ENABLE);
+   \   0000000A   0x2101             MOVS     R1,#+1
+   \   0000000C   0x2010             MOVS     R0,#+16
+   \   0000000E   0x.... 0x....      BL       RCC_APB2PeriphClockCmd
+     36              RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOD,ENABLE);
+   \   00000012   0x2101             MOVS     R1,#+1
+   \   00000014   0x2020             MOVS     R0,#+32
+   \   00000016   0x.... 0x....      BL       RCC_APB2PeriphClockCmd
+     37              RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOE,ENABLE);    
+   \   0000001A   0x2101             MOVS     R1,#+1
+   \   0000001C   0x2040             MOVS     R0,#+64
+   \   0000001E   0x.... 0x....      BL       RCC_APB2PeriphClockCmd
+     38              RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
+   \   00000022   0x2101             MOVS     R1,#+1
+   \   00000024   0x2001             MOVS     R0,#+1
+   \   00000026   0x.... 0x....      BL       RCC_APB1PeriphClockCmd
+     39          }
+   \   0000002A   0xBD01             POP      {R0,PC}          ;; return
+     40          
+
+   \                                 In section .text, align 2, keep-with-next
+     41          void GPIO_Configure(void)
+     42          {
+   \                     GPIO_Configure: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+     43              GPIO_InitTypeDef GPIO_InitStructure;
+     44          
+     45              // TODO: Initialize the GPIO pins using the structure 'GPIO_InitTypeDef' and the function 'GPIO_Init'
+     46                  
+     47              // LCD_CS
+     48              GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6;
+   \   00000002   0x2040             MOVS     R0,#+64
+   \   00000004   0xF8AD 0x0000      STRH     R0,[SP, #+0]
+     49              GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+   \   00000008   0x2003             MOVS     R0,#+3
+   \   0000000A   0xF88D 0x0002      STRB     R0,[SP, #+2]
+     50              GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+   \   0000000E   0x2010             MOVS     R0,#+16
+   \   00000010   0xF88D 0x0003      STRB     R0,[SP, #+3]
+     51              GPIO_Init(GPIOC, &GPIO_InitStructure);
+   \   00000014   0x4669             MOV      R1,SP
+   \   00000016   0x....             LDR.N    R0,??DataTable3  ;; 0x40011000
+   \   00000018   0x.... 0x....      BL       GPIO_Init
+     52              
+     53              // LCD_RS, LCD_WR, LCD_RD, 
+     54              GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13 | GPIO_Pin_14 | GPIO_Pin_15;
+   \   0000001C   0xF44F 0x4060      MOV      R0,#+57344
+   \   00000020   0xF8AD 0x0000      STRH     R0,[SP, #+0]
+     55              GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+   \   00000024   0x2003             MOVS     R0,#+3
+   \   00000026   0xF88D 0x0002      STRB     R0,[SP, #+2]
+     56              GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+   \   0000002A   0x2010             MOVS     R0,#+16
+   \   0000002C   0xF88D 0x0003      STRB     R0,[SP, #+3]
+     57              GPIO_Init(GPIOD, &GPIO_InitStructure);
+   \   00000030   0x4669             MOV      R1,SP
+   \   00000032   0x....             LDR.N    R0,??DataTable3_1  ;; 0x40011400
+   \   00000034   0x.... 0x....      BL       GPIO_Init
+     58              
+     59              // DB00 ~ DB15
+     60              GPIO_InitStructure.GPIO_Pin = GPIO_Pin_All;
+   \   00000038   0xF64F 0x70FF      MOVW     R0,#+65535
+   \   0000003C   0xF8AD 0x0000      STRH     R0,[SP, #+0]
+     61              GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+   \   00000040   0x2003             MOVS     R0,#+3
+   \   00000042   0xF88D 0x0002      STRB     R0,[SP, #+2]
+     62              GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+   \   00000046   0x2010             MOVS     R0,#+16
+   \   00000048   0xF88D 0x0003      STRB     R0,[SP, #+3]
+     63              GPIO_Init(GPIOE, &GPIO_InitStructure);
+   \   0000004C   0x4669             MOV      R1,SP
+   \   0000004E   0x....             LDR.N    R0,??DataTable3_2  ;; 0x40011800
+   \   00000050   0x.... 0x....      BL       GPIO_Init
+     64              
+     65              // LED 1, 2
+     66              GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2 | GPIO_Pin_3;
+   \   00000054   0x200C             MOVS     R0,#+12
+   \   00000056   0xF8AD 0x0000      STRH     R0,[SP, #+0]
+     67              GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+   \   0000005A   0x2003             MOVS     R0,#+3
+   \   0000005C   0xF88D 0x0002      STRB     R0,[SP, #+2]
+     68              GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+   \   00000060   0x2010             MOVS     R0,#+16
+   \   00000062   0xF88D 0x0003      STRB     R0,[SP, #+3]
+     69              GPIO_Init(GPIOD, &GPIO_InitStructure);
+   \   00000066   0x4669             MOV      R1,SP
+   \   00000068   0x....             LDR.N    R0,??DataTable3_1  ;; 0x40011400
+   \   0000006A   0x.... 0x....      BL       GPIO_Init
+     70          }
+   \   0000006E   0xBD01             POP      {R0,PC}          ;; return
+     71          
+
+   \                                 In section .text, align 2, keep-with-next
+     72          void TIM_Configure(void){
+   \                     TIM_Configure: (+1)
+   \   00000000   0xB5E0             PUSH     {R5-R7,LR}
+     73              TIM_TimeBaseInitTypeDef TIM_InitStructure;
+     74              
+     75              TIM_InitStructure.TIM_Prescaler = 7200;
+   \   00000002   0xF44F 0x50E1      MOV      R0,#+7200
+   \   00000006   0xF8AD 0x0000      STRH     R0,[SP, #+0]
+     76              TIM_InitStructure.TIM_CounterMode = TIM_CounterMode_Up;
+   \   0000000A   0x2000             MOVS     R0,#+0
+   \   0000000C   0xF8AD 0x0002      STRH     R0,[SP, #+2]
+     77              TIM_InitStructure.TIM_Period = 10000;
+   \   00000010   0xF242 0x7010      MOVW     R0,#+10000
+   \   00000014   0xF8AD 0x0004      STRH     R0,[SP, #+4]
+     78              TIM_InitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
+   \   00000018   0x2000             MOVS     R0,#+0
+   \   0000001A   0xF8AD 0x0006      STRH     R0,[SP, #+6]
+     79              TIM_InitStructure.TIM_RepetitionCounter = 0x00;
+   \   0000001E   0x2000             MOVS     R0,#+0
+   \   00000020   0xF88D 0x0008      STRB     R0,[SP, #+8]
+     80              TIM_TimeBaseInit(TIM2, &TIM_InitStructure);
+   \   00000024   0x4669             MOV      R1,SP
+   \   00000026   0xF05F 0x4080      MOVS     R0,#+1073741824
+   \   0000002A   0x.... 0x....      BL       TIM_TimeBaseInit
+     81              
+     82              TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);
+   \   0000002E   0x2201             MOVS     R2,#+1
+   \   00000030   0x2101             MOVS     R1,#+1
+   \   00000032   0xF05F 0x4080      MOVS     R0,#+1073741824
+   \   00000036   0x.... 0x....      BL       TIM_ITConfig
+     83              TIM_Cmd(TIM2, ENABLE);
+   \   0000003A   0x2101             MOVS     R1,#+1
+   \   0000003C   0xF05F 0x4080      MOVS     R0,#+1073741824
+   \   00000040   0x.... 0x....      BL       TIM_Cmd
+     84          }
+   \   00000044   0xBD07             POP      {R0-R2,PC}       ;; return
+     85          
+
+   \                                 In section .text, align 2, keep-with-next
+     86          void NVIC_Configure(void) {
+   \                     NVIC_Configure: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+     87          
+     88              NVIC_InitTypeDef NVIC_InitStructure;
+     89              
+     90              // TODO: fill the arg you want
+     91              NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
+   \   00000002   0xF44F 0x60A0      MOV      R0,#+1280
+   \   00000006   0x.... 0x....      BL       NVIC_PriorityGroupConfig
+     92          
+     93              // TODO: Initialize the NVIC using the structure 'NVIC_InitTypeDef' and the function 'NVIC_Init'
+     94              
+     95              // ADC1
+     96              NVIC_InitStructure.NVIC_IRQChannel = TIM2_IRQn;
+   \   0000000A   0x201C             MOVS     R0,#+28
+   \   0000000C   0xF88D 0x0000      STRB     R0,[SP, #+0]
+     97              NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
+   \   00000010   0x2001             MOVS     R0,#+1
+   \   00000012   0xF88D 0x0001      STRB     R0,[SP, #+1]
+     98              NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
+   \   00000016   0x2001             MOVS     R0,#+1
+   \   00000018   0xF88D 0x0002      STRB     R0,[SP, #+2]
+     99              NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+   \   0000001C   0x2001             MOVS     R0,#+1
+   \   0000001E   0xF88D 0x0003      STRB     R0,[SP, #+3]
+    100              NVIC_Init(&NVIC_InitStructure);
+   \   00000022   0x4668             MOV      R0,SP
+   \   00000024   0x.... 0x....      BL       NVIC_Init
+    101          }
+   \   00000028   0xBD01             POP      {R0,PC}          ;; return
+    102          
+
+   \                                 In section .bss, align 4
+    103          int num; 
+   \                     num:
+   \   00000000                      DS8 4
+    104          
+
+   \                                 In section .text, align 2, keep-with-next
+    105          void TIM2_IRQHandler(void){
+   \                     TIM2_IRQHandler: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    106            if (TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET) {
+   \   00000002   0x2101             MOVS     R1,#+1
+   \   00000004   0xF05F 0x4080      MOVS     R0,#+1073741824
+   \   00000008   0x.... 0x....      BL       TIM_GetITStatus
+   \   0000000C   0x2800             CMP      R0,#+0
+   \   0000000E   0xD05C             BEQ.N    ??TIM2_IRQHandler_0
+    107                  cnt++;
+   \   00000010   0x....             LDR.N    R0,??DataTable3_3
+   \   00000012   0x6800             LDR      R0,[R0, #+0]
+   \   00000014   0x1C40             ADDS     R0,R0,#+1
+   \   00000016   0x....             LDR.N    R1,??DataTable3_3
+   \   00000018   0x6008             STR      R0,[R1, #+0]
+    108                  
+    109                  if(cnt % 1 == 0) LED1 = !LED1;
+   \   0000001A   0x....             LDR.N    R0,??DataTable3_4
+   \   0000001C   0x6800             LDR      R0,[R0, #+0]
+   \   0000001E   0x2800             CMP      R0,#+0
+   \   00000020   0xD103             BNE.N    ??TIM2_IRQHandler_1
+   \   00000022   0x2001             MOVS     R0,#+1
+   \   00000024   0x....             LDR.N    R1,??DataTable3_4
+   \   00000026   0x6008             STR      R0,[R1, #+0]
+   \   00000028   0xE002             B.N      ??TIM2_IRQHandler_2
+   \                     ??TIM2_IRQHandler_1: (+1)
+   \   0000002A   0x2000             MOVS     R0,#+0
+   \   0000002C   0x....             LDR.N    R1,??DataTable3_4
+   \   0000002E   0x6008             STR      R0,[R1, #+0]
+    110                  if(cnt % 5 == 0) LED2 = !LED2;
+   \                     ??TIM2_IRQHandler_2: (+1)
+   \   00000030   0x2005             MOVS     R0,#+5
+   \   00000032   0x....             LDR.N    R1,??DataTable3_3
+   \   00000034   0x6809             LDR      R1,[R1, #+0]
+   \   00000036   0x....             LDR.N    R2,??DataTable3_3
+   \   00000038   0x6812             LDR      R2,[R2, #+0]
+   \   0000003A   0xFB92 0xF2F0      SDIV     R2,R2,R0
+   \   0000003E   0xFB00 0x1012      MLS      R0,R0,R2,R1
+   \   00000042   0x2800             CMP      R0,#+0
+   \   00000044   0xD10A             BNE.N    ??TIM2_IRQHandler_3
+   \   00000046   0x....             LDR.N    R0,??DataTable3_5
+   \   00000048   0x6800             LDR      R0,[R0, #+0]
+   \   0000004A   0x2800             CMP      R0,#+0
+   \   0000004C   0xD103             BNE.N    ??TIM2_IRQHandler_4
+   \   0000004E   0x2001             MOVS     R0,#+1
+   \   00000050   0x....             LDR.N    R1,??DataTable3_5
+   \   00000052   0x6008             STR      R0,[R1, #+0]
+   \   00000054   0xE002             B.N      ??TIM2_IRQHandler_3
+   \                     ??TIM2_IRQHandler_4: (+1)
+   \   00000056   0x2000             MOVS     R0,#+0
+   \   00000058   0x....             LDR.N    R1,??DataTable3_5
+   \   0000005A   0x6008             STR      R0,[R1, #+0]
+    111                  
+    112                  
+    113                  if(LEDs_TOGGLE && LED1){
+   \                     ??TIM2_IRQHandler_3: (+1)
+   \   0000005C   0x....             LDR.N    R0,??DataTable3_6
+   \   0000005E   0x6800             LDR      R0,[R0, #+0]
+   \   00000060   0x2800             CMP      R0,#+0
+   \   00000062   0xD008             BEQ.N    ??TIM2_IRQHandler_5
+   \   00000064   0x....             LDR.N    R0,??DataTable3_4
+   \   00000066   0x6800             LDR      R0,[R0, #+0]
+   \   00000068   0x2800             CMP      R0,#+0
+   \   0000006A   0xD004             BEQ.N    ??TIM2_IRQHandler_5
+    114                    GPIO_SetBits(GPIOD, GPIO_Pin_2);
+   \   0000006C   0x2104             MOVS     R1,#+4
+   \   0000006E   0x....             LDR.N    R0,??DataTable3_1  ;; 0x40011400
+   \   00000070   0x.... 0x....      BL       GPIO_SetBits
+   \   00000074   0xE00B             B.N      ??TIM2_IRQHandler_6
+    115                  }
+    116                  else if(LEDs_TOGGLE && !LED1){
+   \                     ??TIM2_IRQHandler_5: (+1)
+   \   00000076   0x....             LDR.N    R0,??DataTable3_6
+   \   00000078   0x6800             LDR      R0,[R0, #+0]
+   \   0000007A   0x2800             CMP      R0,#+0
+   \   0000007C   0xD007             BEQ.N    ??TIM2_IRQHandler_6
+   \   0000007E   0x....             LDR.N    R0,??DataTable3_4
+   \   00000080   0x6800             LDR      R0,[R0, #+0]
+   \   00000082   0x2800             CMP      R0,#+0
+   \   00000084   0xD103             BNE.N    ??TIM2_IRQHandler_6
+    117                    GPIO_ResetBits(GPIOD, GPIO_Pin_2);
+   \   00000086   0x2104             MOVS     R1,#+4
+   \   00000088   0x....             LDR.N    R0,??DataTable3_1  ;; 0x40011400
+   \   0000008A   0x.... 0x....      BL       GPIO_ResetBits
+    118                  }
+    119                   if(LEDs_TOGGLE && LED2){
+   \                     ??TIM2_IRQHandler_6: (+1)
+   \   0000008E   0x....             LDR.N    R0,??DataTable3_6
+   \   00000090   0x6800             LDR      R0,[R0, #+0]
+   \   00000092   0x2800             CMP      R0,#+0
+   \   00000094   0xD008             BEQ.N    ??TIM2_IRQHandler_7
+   \   00000096   0x....             LDR.N    R0,??DataTable3_5
+   \   00000098   0x6800             LDR      R0,[R0, #+0]
+   \   0000009A   0x2800             CMP      R0,#+0
+   \   0000009C   0xD004             BEQ.N    ??TIM2_IRQHandler_7
+    120                    GPIO_SetBits(GPIOD, GPIO_Pin_3);
+   \   0000009E   0x2108             MOVS     R1,#+8
+   \   000000A0   0x....             LDR.N    R0,??DataTable3_1  ;; 0x40011400
+   \   000000A2   0x.... 0x....      BL       GPIO_SetBits
+   \   000000A6   0xE00B             B.N      ??TIM2_IRQHandler_8
+    121                  }
+    122                   else if(LEDs_TOGGLE && !LED2){
+   \                     ??TIM2_IRQHandler_7: (+1)
+   \   000000A8   0x....             LDR.N    R0,??DataTable3_6
+   \   000000AA   0x6800             LDR      R0,[R0, #+0]
+   \   000000AC   0x2800             CMP      R0,#+0
+   \   000000AE   0xD007             BEQ.N    ??TIM2_IRQHandler_8
+   \   000000B0   0x....             LDR.N    R0,??DataTable3_5
+   \   000000B2   0x6800             LDR      R0,[R0, #+0]
+   \   000000B4   0x2800             CMP      R0,#+0
+   \   000000B6   0xD103             BNE.N    ??TIM2_IRQHandler_8
+    123                    GPIO_ResetBits(GPIOD, GPIO_Pin_3);
+   \   000000B8   0x2108             MOVS     R1,#+8
+   \   000000BA   0x....             LDR.N    R0,??DataTable3_1  ;; 0x40011400
+   \   000000BC   0x.... 0x....      BL       GPIO_ResetBits
+    124                  }
+    125                  TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
+   \                     ??TIM2_IRQHandler_8: (+1)
+   \   000000C0   0x2101             MOVS     R1,#+1
+   \   000000C2   0xF05F 0x4080      MOVS     R0,#+1073741824
+   \   000000C6   0x.... 0x....      BL       TIM_ClearITPendingBit
+    126            }
+    127          }
+   \                     ??TIM2_IRQHandler_0: (+1)
+   \   000000CA   0xBD01             POP      {R0,PC}          ;; return
+    128          
+
+   \                                 In section .text, align 2, keep-with-next
+    129          int main(void)
+    130          {
+   \                     main: (+1)
+   \   00000000   0xB5E0             PUSH     {R5-R7,LR}
+    131              SystemInit();
+   \   00000002   0x.... 0x....      BL       SystemInit
+    132              RCC_Configure();
+   \   00000006   0x.... 0x....      BL       RCC_Configure
+    133              GPIO_Configure();
+   \   0000000A   0x.... 0x....      BL       GPIO_Configure
+    134              TIM_Configure();
+   \   0000000E   0x.... 0x....      BL       TIM_Configure
+    135              NVIC_Configure();
+   \   00000012   0x.... 0x....      BL       NVIC_Configure
+    136              
+    137              LCD_Init();
+   \   00000016   0x.... 0x....      BL       LCD_Init
+    138              Touch_Configuration();
+   \   0000001A   0x.... 0x....      BL       Touch_Configuration
+    139              Touch_Adjust();
+   \   0000001E   0x.... 0x....      BL       Touch_Adjust
+    140              LCD_Clear(WHITE);
+   \   00000022   0xF64F 0x70FF      MOVW     R0,#+65535
+   \   00000026   0x.... 0x....      BL       LCD_Clear
+    141              
+    142              uint16_t x, y;
+    143              LCD_ShowString(10, 30, OFF, BLACK, WHITE);
+                                            ^
+Warning[Pe167]: argument of type "char *" is incompatible with parameter of
+          type "u8 *"
+   \   0000002A   0xF64F 0x70FF      MOVW     R0,#+65535
+   \   0000002E   0x9000             STR      R0,[SP, #+0]
+   \   00000030   0x2300             MOVS     R3,#+0
+   \   00000032   0x....             LDR.N    R2,??DataTable3_7
+   \   00000034   0x211E             MOVS     R1,#+30
+   \   00000036   0x200A             MOVS     R0,#+10
+   \   00000038   0x.... 0x....      BL       LCD_ShowString
+    144              LCD_ShowString(10, 10, team, BLACK, WHITE);
+                                            ^
+Warning[Pe167]: argument of type "char *" is incompatible with parameter of
+          type "u8 *"
+   \   0000003C   0xF64F 0x70FF      MOVW     R0,#+65535
+   \   00000040   0x9000             STR      R0,[SP, #+0]
+   \   00000042   0x2300             MOVS     R3,#+0
+   \   00000044   0x....             LDR.N    R2,??DataTable3_8
+   \   00000046   0x210A             MOVS     R1,#+10
+   \   00000048   0x200A             MOVS     R0,#+10
+   \   0000004A   0x.... 0x....      BL       LCD_ShowString
+    145              LCD_ShowString(60, 125, BUT, BLACK, WHITE);
+                                             ^
+Warning[Pe167]: argument of type "char *" is incompatible with parameter of
+          type "u8 *"
+   \   0000004E   0xF64F 0x70FF      MOVW     R0,#+65535
+   \   00000052   0x9000             STR      R0,[SP, #+0]
+   \   00000054   0x2300             MOVS     R3,#+0
+   \   00000056   0x....             LDR.N    R2,??DataTable3_9
+   \   00000058   0x217D             MOVS     R1,#+125
+   \   0000005A   0x203C             MOVS     R0,#+60
+   \   0000005C   0x.... 0x....      BL       LCD_ShowString
+    146              LCD_DrawRectangle(50, 100, 100, 150);
+   \   00000060   0x2396             MOVS     R3,#+150
+   \   00000062   0x2264             MOVS     R2,#+100
+   \   00000064   0x2164             MOVS     R1,#+100
+   \   00000066   0x2032             MOVS     R0,#+50
+   \   00000068   0x.... 0x....      BL       LCD_DrawRectangle
+   \   0000006C   0xE008             B.N      ??main_0
+    147                          
+    148                
+    149              while (1) {
+    150                  // TODO: implement
+    151                  PosX = 0;
+    152                  PosY = 0;
+    153                  Touch_GetXY(&x, &y, 1);
+    154                  
+    155                  Convert_Pos(x, y, &PosX, &PosY);
+    156                  
+    157                  if(50<=PosX && PosX <=100){
+    158                    if(100 <= PosY && PosY <= 150){
+    159                      LEDs_TOGGLE = !LEDs_TOGGLE;
+    160                      if(LEDs_TOGGLE)
+    161                        LCD_ShowString(10, 30, ON, BLACK, WHITE);
+                                                      ^
+Warning[Pe167]: argument of type "char *" is incompatible with parameter of
+          type "u8 *"
+   \                     ??main_1: (+1)
+   \   0000006E   0xF64F 0x70FF      MOVW     R0,#+65535
+   \   00000072   0x9000             STR      R0,[SP, #+0]
+   \   00000074   0x2300             MOVS     R3,#+0
+   \   00000076   0x....             LDR.N    R2,??DataTable3_10
+   \   00000078   0x211E             MOVS     R1,#+30
+   \   0000007A   0x200A             MOVS     R0,#+10
+   \   0000007C   0x.... 0x....      BL       LCD_ShowString
+   \                     ??main_0: (+1)
+   \   00000080   0x2000             MOVS     R0,#+0
+   \   00000082   0x....             LDR.N    R1,??DataTable3_11
+   \   00000084   0x8008             STRH     R0,[R1, #+0]
+   \   00000086   0x2000             MOVS     R0,#+0
+   \   00000088   0x....             LDR.N    R1,??DataTable3_12
+   \   0000008A   0x8008             STRH     R0,[R1, #+0]
+   \   0000008C   0x2201             MOVS     R2,#+1
+   \   0000008E   0xA901             ADD      R1,SP,#+4
+   \   00000090   0xF10D 0x0006      ADD      R0,SP,#+6
+   \   00000094   0x.... 0x....      BL       Touch_GetXY
+   \   00000098   0x....             LDR.N    R3,??DataTable3_12
+   \   0000009A   0x....             LDR.N    R2,??DataTable3_11
+   \   0000009C   0xF8BD 0x1004      LDRH     R1,[SP, #+4]
+   \   000000A0   0xF8BD 0x0006      LDRH     R0,[SP, #+6]
+   \   000000A4   0x.... 0x....      BL       Convert_Pos
+   \   000000A8   0x....             LDR.N    R0,??DataTable3_11
+   \   000000AA   0x8800             LDRH     R0,[R0, #+0]
+   \   000000AC   0x3832             SUBS     R0,R0,#+50
+   \   000000AE   0x2833             CMP      R0,#+51
+   \   000000B0   0xD2E6             BCS.N    ??main_0
+   \   000000B2   0x....             LDR.N    R0,??DataTable3_12
+   \   000000B4   0x8800             LDRH     R0,[R0, #+0]
+   \   000000B6   0x3864             SUBS     R0,R0,#+100
+   \   000000B8   0x2833             CMP      R0,#+51
+   \   000000BA   0xD2E1             BCS.N    ??main_0
+   \   000000BC   0x....             LDR.N    R0,??DataTable3_6
+   \   000000BE   0x6800             LDR      R0,[R0, #+0]
+   \   000000C0   0x2800             CMP      R0,#+0
+   \   000000C2   0xD103             BNE.N    ??main_2
+   \   000000C4   0x2001             MOVS     R0,#+1
+   \   000000C6   0x....             LDR.N    R1,??DataTable3_6
+   \   000000C8   0x6008             STR      R0,[R1, #+0]
+   \   000000CA   0xE002             B.N      ??main_3
+   \                     ??main_2: (+1)
+   \   000000CC   0x2000             MOVS     R0,#+0
+   \   000000CE   0x....             LDR.N    R1,??DataTable3_6
+   \   000000D0   0x6008             STR      R0,[R1, #+0]
+   \                     ??main_3: (+1)
+   \   000000D2   0x....             LDR.N    R0,??DataTable3_6
+   \   000000D4   0x6800             LDR      R0,[R0, #+0]
+   \   000000D6   0x2800             CMP      R0,#+0
+   \   000000D8   0xD1C9             BNE.N    ??main_1
+    162                      else{
+    163                        LCD_ShowString(10, 30, OFF, BLACK, WHITE);
+                                                      ^
+Warning[Pe167]: argument of type "char *" is incompatible with parameter of
+          type "u8 *"
+   \   000000DA   0xF64F 0x70FF      MOVW     R0,#+65535
+   \   000000DE   0x9000             STR      R0,[SP, #+0]
+   \   000000E0   0x2300             MOVS     R3,#+0
+   \   000000E2   0x....             LDR.N    R2,??DataTable3_7
+   \   000000E4   0x211E             MOVS     R1,#+30
+   \   000000E6   0x200A             MOVS     R0,#+10
+   \   000000E8   0x.... 0x....      BL       LCD_ShowString
+    164                        GPIO_ResetBits(GPIOD, GPIO_Pin_2);
+   \   000000EC   0x2104             MOVS     R1,#+4
+   \   000000EE   0x....             LDR.N    R0,??DataTable3_1  ;; 0x40011400
+   \   000000F0   0x.... 0x....      BL       GPIO_ResetBits
+    165                        GPIO_ResetBits(GPIOD, GPIO_Pin_3);
+   \   000000F4   0x2108             MOVS     R1,#+8
+   \   000000F6   0x....             LDR.N    R0,??DataTable3_1  ;; 0x40011400
+   \   000000F8   0x.... 0x....      BL       GPIO_ResetBits
+   \   000000FC   0xE7C0             B.N      ??main_0
+    166                      }
+    167                     }
+    168                   }
+    169                  
+    170                  
+    171                     
+    172              }
+    173              
+    174              return 0;
+                     ^
+Warning[Pe111]: statement is unreachable
+    175          }
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable3:
+   \   00000000   0x40011000         DC32     0x40011000
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable3_1:
+   \   00000000   0x40011400         DC32     0x40011400
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable3_2:
+   \   00000000   0x40011800         DC32     0x40011800
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable3_3:
+   \   00000000   0x........         DC32     cnt
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable3_4:
+   \   00000000   0x........         DC32     LED1
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable3_5:
+   \   00000000   0x........         DC32     LED2
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable3_6:
+   \   00000000   0x........         DC32     LEDs_TOGGLE
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable3_7:
+   \   00000000   0x........         DC32     OFF
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable3_8:
+   \   00000000   0x........         DC32     team
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable3_9:
+   \   00000000   0x........         DC32     BUT
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable3_10:
+   \   00000000   0x........         DC32     ON
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable3_11:
+   \   00000000   0x........         DC32     PosX
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable3_12:
+   \   00000000   0x........         DC32     PosY
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       8   GPIO_Configure
+         8   -> GPIO_Init
+       8   NVIC_Configure
+         8   -> NVIC_Init
+         8   -> NVIC_PriorityGroupConfig
+       8   RCC_Configure
+         8   -> RCC_APB1PeriphClockCmd
+         8   -> RCC_APB2PeriphClockCmd
+       8   TIM2_IRQHandler
+         8   -> GPIO_ResetBits
+         8   -> GPIO_SetBits
+         8   -> TIM_ClearITPendingBit
+         8   -> TIM_GetITStatus
+      16   TIM_Configure
+        16   -> TIM_Cmd
+        16   -> TIM_ITConfig
+        16   -> TIM_TimeBaseInit
+      16   main
+        16   -> Convert_Pos
+        16   -> GPIO_Configure
+        16   -> GPIO_ResetBits
+        16   -> LCD_Clear
+        16   -> LCD_DrawRectangle
+        16   -> LCD_Init
+        16   -> LCD_ShowString
+        16   -> NVIC_Configure
+        16   -> RCC_Configure
+        16   -> SystemInit
+        16   -> TIM_Configure
+        16   -> Touch_Adjust
+        16   -> Touch_Configuration
+        16   -> Touch_GetXY
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable3
+       4  ??DataTable3_1
+       4  ??DataTable3_10
+       4  ??DataTable3_11
+       4  ??DataTable3_12
+       4  ??DataTable3_2
+       4  ??DataTable3_3
+       4  ??DataTable3_4
+       4  ??DataTable3_5
+       4  ??DataTable3_6
+       4  ??DataTable3_7
+       4  ??DataTable3_8
+       4  ??DataTable3_9
+       4  BUT
+     112  GPIO_Configure
+       4  LED1
+       4  LED2
+       4  LEDs_TOGGLE
+      42  NVIC_Configure
+       4  OFF
+       8  ON
+       2  PosX
+       2  PosY
+      44  RCC_Configure
+     204  TIM2_IRQHandler
+      70  TIM_Configure
+       4  cnt
+      48  color
+     254  main
+       4  num
+      12  team
+       2  value
+
+ 
+  26 bytes in section .bss
+  76 bytes in section .data
+ 778 bytes in section .text
+ 
+ 778 bytes of CODE memory
+ 102 bytes of DATA memory
+
+Errors: none
+Warnings: 6
