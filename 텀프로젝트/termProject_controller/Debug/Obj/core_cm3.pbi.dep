@@ -1,0 +1,8 @@
+core_cm3.pbi: \
+  C:\Users\tykr0\Desktop\termProject_controller\CoreSupport\core_cm3.c \
+  H:\Program\ Files\IAR\ Systems\Embedded\ Workbench\ 8.4\arm\inc\c\stdint.h \
+  H:\Program\ Files\IAR\ Systems\Embedded\ Workbench\ 8.4\arm\inc\c\ycheck.h \
+  H:\Program\ Files\IAR\ Systems\Embedded\ Workbench\ 8.4\arm\inc\c\yvals.h \
+  H:\Program\ Files\IAR\ Systems\Embedded\ Workbench\ 8.4\arm\inc\c\DLib_Defaults.h \
+  H:\Program\ Files\IAR\ Systems\Embedded\ Workbench\ 8.4\arm\inc\c\DLib_Config_Normal.h \
+  H:\Program\ Files\IAR\ Systems\Embedded\ Workbench\ 8.4\arm\inc\c\DLib_Product.h

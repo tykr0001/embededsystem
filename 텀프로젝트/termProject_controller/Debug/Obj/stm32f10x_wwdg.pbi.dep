@@ -1,0 +1,39 @@
+stm32f10x_wwdg.pbi: \
+  C:\Users\tykr0\Desktop\termProject_controller\Libraries\STM32F10x_StdPeriph_Driver_v3.5\src\stm32f10x_wwdg.c \
+  C:\Users\tykr0\Desktop\termProject_controller\libraries\STM32F10x_StdPeriph_Driver_v3.5\inc\stm32f10x_wwdg.h \
+  C:\Users\tykr0\Desktop\termProject_controller\libraries\CMSIS\DeviceSupport\stm32f10x.h \
+  H:\Program\ Files\IAR\ Systems\Embedded\ Workbench\ 8.4\arm\CMSIS\Core\Include\core_cm3.h \
+  H:\Program\ Files\IAR\ Systems\Embedded\ Workbench\ 8.4\arm\inc\c\stdint.h \
+  H:\Program\ Files\IAR\ Systems\Embedded\ Workbench\ 8.4\arm\inc\c\ycheck.h \
+  H:\Program\ Files\IAR\ Systems\Embedded\ Workbench\ 8.4\arm\inc\c\yvals.h \
+  H:\Program\ Files\IAR\ Systems\Embedded\ Workbench\ 8.4\arm\inc\c\DLib_Defaults.h \
+  H:\Program\ Files\IAR\ Systems\Embedded\ Workbench\ 8.4\arm\inc\c\DLib_Config_Normal.h \
+  H:\Program\ Files\IAR\ Systems\Embedded\ Workbench\ 8.4\arm\inc\c\DLib_Product.h \
+  H:\Program\ Files\IAR\ Systems\Embedded\ Workbench\ 8.4\arm\CMSIS\Core\Include/cmsis_version.h \
+  H:\Program\ Files\IAR\ Systems\Embedded\ Workbench\ 8.4\arm\CMSIS\Core\Include/cmsis_compiler.h \
+  H:\Program\ Files\IAR\ Systems\Embedded\ Workbench\ 8.4\arm\CMSIS\Core\Include\cmsis_iccarm.h \
+  H:\Program\ Files\IAR\ Systems\Embedded\ Workbench\ 8.4\arm\inc\c\iccarm_builtin.h \
+  C:\Users\tykr0\Desktop\termProject_controller\libraries\CMSIS\DeviceSupport/system_stm32f10x.h \
+  C:\Users\tykr0\Desktop\termProject_controller\user\inc\stm32f10x_conf.h \
+  C:\Users\tykr0\Desktop\termProject_controller\libraries\STM32F10x_StdPeriph_Driver_v3.5\inc\stm32f10x_adc.h \
+  C:\Users\tykr0\Desktop\termProject_controller\libraries\STM32F10x_StdPeriph_Driver_v3.5\inc\stm32f10x_bkp.h \
+  C:\Users\tykr0\Desktop\termProject_controller\libraries\STM32F10x_StdPeriph_Driver_v3.5\inc\stm32f10x_can.h \
+  C:\Users\tykr0\Desktop\termProject_controller\libraries\STM32F10x_StdPeriph_Driver_v3.5\inc\stm32f10x_cec.h \
+  C:\Users\tykr0\Desktop\termProject_controller\libraries\STM32F10x_StdPeriph_Driver_v3.5\inc\stm32f10x_crc.h \
+  C:\Users\tykr0\Desktop\termProject_controller\libraries\STM32F10x_StdPeriph_Driver_v3.5\inc\stm32f10x_dac.h \
+  C:\Users\tykr0\Desktop\termProject_controller\libraries\STM32F10x_StdPeriph_Driver_v3.5\inc\stm32f10x_dbgmcu.h \
+  C:\Users\tykr0\Desktop\termProject_controller\libraries\STM32F10x_StdPeriph_Driver_v3.5\inc\stm32f10x_dma.h \
+  C:\Users\tykr0\Desktop\termProject_controller\libraries\STM32F10x_StdPeriph_Driver_v3.5\inc\stm32f10x_exti.h \
+  C:\Users\tykr0\Desktop\termProject_controller\libraries\STM32F10x_StdPeriph_Driver_v3.5\inc\stm32f10x_flash.h \
+  C:\Users\tykr0\Desktop\termProject_controller\libraries\STM32F10x_StdPeriph_Driver_v3.5\inc\stm32f10x_fsmc.h \
+  C:\Users\tykr0\Desktop\termProject_controller\libraries\STM32F10x_StdPeriph_Driver_v3.5\inc\stm32f10x_gpio.h \
+  C:\Users\tykr0\Desktop\termProject_controller\libraries\STM32F10x_StdPeriph_Driver_v3.5\inc\stm32f10x_i2c.h \
+  C:\Users\tykr0\Desktop\termProject_controller\libraries\STM32F10x_StdPeriph_Driver_v3.5\inc\stm32f10x_iwdg.h \
+  C:\Users\tykr0\Desktop\termProject_controller\libraries\STM32F10x_StdPeriph_Driver_v3.5\inc\stm32f10x_pwr.h \
+  C:\Users\tykr0\Desktop\termProject_controller\libraries\STM32F10x_StdPeriph_Driver_v3.5\inc\stm32f10x_rcc.h \
+  C:\Users\tykr0\Desktop\termProject_controller\libraries\STM32F10x_StdPeriph_Driver_v3.5\inc\stm32f10x_rtc.h \
+  C:\Users\tykr0\Desktop\termProject_controller\libraries\STM32F10x_StdPeriph_Driver_v3.5\inc\stm32f10x_sdio.h \
+  C:\Users\tykr0\Desktop\termProject_controller\libraries\STM32F10x_StdPeriph_Driver_v3.5\inc\stm32f10x_spi.h \
+  C:\Users\tykr0\Desktop\termProject_controller\libraries\STM32F10x_StdPeriph_Driver_v3.5\inc\stm32f10x_tim.h \
+  C:\Users\tykr0\Desktop\termProject_controller\libraries\STM32F10x_StdPeriph_Driver_v3.5\inc\stm32f10x_usart.h \
+  C:\Users\tykr0\Desktop\termProject_controller\libraries\STM32F10x_StdPeriph_Driver_v3.5\inc\misc.h
