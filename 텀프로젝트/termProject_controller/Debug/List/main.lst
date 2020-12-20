@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V8.50.6.265/W32 for ARM         19/Dec/2020  15:40:39
+# IAR ANSI C/C++ Compiler V8.50.6.265/W32 for ARM         20/Dec/2020  16:48:31
 # Copyright 1999-2020 IAR Systems AB.
 #
 #    Cpu mode             
@@ -8,7 +8,7 @@
 #    Source file       =
 #        C:\Users\tykr0\Desktop\termProject_controller\user\main.c
 #    Command line      =
-#        -f C:\Users\tykr0\AppData\Local\Temp\EW7895.tmp
+#        -f C:\Users\tykr0\AppData\Local\Temp\EWF6F0.tmp
 #        (C:\Users\tykr0\Desktop\termProject_controller\user\main.c -D
 #        USE_STDPERIPH_DRIVER -D STM32F10X_CL -lC
 #        C:\Users\tykr0\Desktop\termProject_controller\Debug\List -o
@@ -114,370 +114,390 @@ C:\Users\tykr0\Desktop\termProject_controller\user\main.c
    \       0x1E   0xF45F 0x3000      MOVS     R0,#+131072
    \       0x22   0x....'....        BL       RCC_APB1PeriphClockCmd
      38               
-     39              
-     40          }
-   \       0x26   0xBD01             POP      {R0,PC}          ;; return
-     41          
+     39              // programming mode test
+     40              RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC,ENABLE);
+   \       0x26   0x2101             MOVS     R1,#+1
+   \       0x28   0x2010             MOVS     R0,#+16
+   \       0x2A   0x....'....        BL       RCC_APB2PeriphClockCmd
+     41          }
+   \       0x2E   0xBD01             POP      {R0,PC}          ;; return
+     42          
 
    \                                 In section .text, align 2, keep-with-next
-     42          void GPIO_Configure(void)
-     43          {
+     43          void GPIO_Configure(void)
+     44          {
    \                     GPIO_Configure: (+1)
    \        0x0   0xB51C             PUSH     {R2-R4,LR}
-     44              GPIO_InitTypeDef GPIO_InitStructure;
-     45          
-     46              // TODO: Initialize the GPIO pins using the structure 'GPIO_InitTypeDef' and the function 'GPIO_Init'
-     47             
-     48              /* UART1 pin setting */
-     49              //TX
-     50              GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;
+     45              GPIO_InitTypeDef GPIO_InitStructure;
+     46          
+     47              // TODO: Initialize the GPIO pins using the structure 'GPIO_InitTypeDef' and the function 'GPIO_Init'
+     48             
+     49              /* UART1 pin setting */
+     50              //TX
+     51              GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;
    \        0x2   0xF44F 0x7000      MOV      R0,#+512
    \        0x6   0xF8AD 0x0000      STRH     R0,[SP, #+0]
-     51              GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+     52              GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
    \        0xA   0x2003             MOVS     R0,#+3
    \        0xC   0xF88D 0x0002      STRB     R0,[SP, #+2]
-     52              GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+     53              GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
    \       0x10   0x2018             MOVS     R0,#+24
    \       0x12   0xF88D 0x0003      STRB     R0,[SP, #+3]
-     53              GPIO_Init(GPIOA, &GPIO_InitStructure);
+     54              GPIO_Init(GPIOA, &GPIO_InitStructure);
    \       0x16   0x....             LDR.N    R4,??DataTable9_1  ;; 0x40010800
    \       0x18   0x4669             MOV      R1,SP
    \       0x1A   0x0020             MOVS     R0,R4
    \       0x1C   0x....'....        BL       GPIO_Init
-     54              
-     55              //RX
-     56              GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;
+     55              
+     56              //RX
+     57              GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;
    \       0x20   0xF44F 0x6080      MOV      R0,#+1024
    \       0x24   0xF8AD 0x0000      STRH     R0,[SP, #+0]
-     57              GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+     58              GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
    \       0x28   0x2003             MOVS     R0,#+3
    \       0x2A   0xF88D 0x0002      STRB     R0,[SP, #+2]
-     58              GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
+     59              GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
    \       0x2E   0x2048             MOVS     R0,#+72
    \       0x30   0xF88D 0x0003      STRB     R0,[SP, #+3]
-     59              GPIO_Init(GPIOA, &GPIO_InitStructure);
+     60              GPIO_Init(GPIOA, &GPIO_InitStructure);
    \       0x34   0x4669             MOV      R1,SP
    \       0x36   0x0020             MOVS     R0,R4
    \       0x38   0x....'....        BL       GPIO_Init
-     60              
      61              
-     62              /* UART2 pin setting */
-     63              //TX
-     64              GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2;
+     62              
+     63              /* UART2 pin setting */
+     64              //TX
+     65              GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2;
    \       0x3C   0x2004             MOVS     R0,#+4
    \       0x3E   0xF8AD 0x0000      STRH     R0,[SP, #+0]
-     65              GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+     66              GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
    \       0x42   0x2003             MOVS     R0,#+3
    \       0x44   0xF88D 0x0002      STRB     R0,[SP, #+2]
-     66              GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+     67              GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
    \       0x48   0x2018             MOVS     R0,#+24
    \       0x4A   0xF88D 0x0003      STRB     R0,[SP, #+3]
-     67              GPIO_Init(GPIOA, &GPIO_InitStructure);
+     68              GPIO_Init(GPIOA, &GPIO_InitStructure);
    \       0x4E   0x4669             MOV      R1,SP
    \       0x50   0x0020             MOVS     R0,R4
    \       0x52   0x....'....        BL       GPIO_Init
-     68              
-     69              //RX
-     70              GPIO_InitStructure.GPIO_Pin = GPIO_Pin_3;
+     69              
+     70              //RX
+     71              GPIO_InitStructure.GPIO_Pin = GPIO_Pin_3;
    \       0x56   0x2008             MOVS     R0,#+8
    \       0x58   0xF8AD 0x0000      STRH     R0,[SP, #+0]
-     71              GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+     72              GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
    \       0x5C   0x2003             MOVS     R0,#+3
    \       0x5E   0xF88D 0x0002      STRB     R0,[SP, #+2]
-     72              GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
+     73              GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
    \       0x62   0x2048             MOVS     R0,#+72
    \       0x64   0xF88D 0x0003      STRB     R0,[SP, #+3]
-     73              GPIO_Init(GPIOA, &GPIO_InitStructure);
+     74              GPIO_Init(GPIOA, &GPIO_InitStructure);
    \       0x68   0x4669             MOV      R1,SP
    \       0x6A   0x0020             MOVS     R0,R4
    \       0x6C   0x....'....        BL       GPIO_Init
-     74              
-     75          }
-   \       0x70   0xBD13             POP      {R0,R1,R4,PC}    ;; return
-     76          
+     75              
+     76              // programming mode test
+     77              GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13;
+   \       0x70   0xF44F 0x5000      MOV      R0,#+8192
+   \       0x74   0xF8AD 0x0000      STRH     R0,[SP, #+0]
+     78              GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+   \       0x78   0x2003             MOVS     R0,#+3
+   \       0x7A   0xF88D 0x0002      STRB     R0,[SP, #+2]
+     79              GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+   \       0x7E   0x2010             MOVS     R0,#+16
+   \       0x80   0xF88D 0x0003      STRB     R0,[SP, #+3]
+     80              GPIO_Init(GPIOC, &GPIO_InitStructure);
+   \       0x84   0x4669             MOV      R1,SP
+   \       0x86   0x....             LDR.N    R0,??DataTable9_2  ;; 0x40011000
+   \       0x88   0x....'....        BL       GPIO_Init
+     81          
+     82              
+     83          }
+   \       0x8C   0xBD13             POP      {R0,R1,R4,PC}    ;; return
+     84          
 
    \                                 In section .text, align 2, keep-with-next
-     77          void USART1_Init(void)
-     78          {
+     85          void USART1_Init(void)
+     86          {
    \                     USART1_Init: (+1)
    \        0x0   0xB51F             PUSH     {R0-R4,LR}
-     79              USART_InitTypeDef USART1_InitStructure;
-     80          
-     81              // Enable the USART1 peripheral
-     82              USART_Cmd(USART1, ENABLE);
-   \        0x2   0x....             LDR.N    R4,??DataTable9_2  ;; 0x40013800
+     87              USART_InitTypeDef USART1_InitStructure;
+     88          
+     89              // Enable the USART1 peripheral
+     90              USART_Cmd(USART1, ENABLE);
+   \        0x2   0x....             LDR.N    R4,??DataTable9_3  ;; 0x40013800
    \        0x4   0x2101             MOVS     R1,#+1
    \        0x6   0x0020             MOVS     R0,R4
    \        0x8   0x....'....        BL       USART_Cmd
-     83             
-     84              // TODO: Initialize the USART using the structure 'USART_InitTypeDef' and the function 'USART_Init'
-     85              USART1_InitStructure.USART_BaudRate=9600;
+     91             
+     92              // TODO: Initialize the USART using the structure 'USART_InitTypeDef' and the function 'USART_Init'
+     93              USART1_InitStructure.USART_BaudRate=9600;
    \        0xC   0xF44F 0x5016      MOV      R0,#+9600
    \       0x10   0x9000             STR      R0,[SP, #+0]
-     86              USART1_InitStructure.USART_WordLength=USART_WordLength_8b;
+     94              USART1_InitStructure.USART_WordLength=USART_WordLength_8b;
    \       0x12   0x2000             MOVS     R0,#+0
    \       0x14   0xF8AD 0x0004      STRH     R0,[SP, #+4]
-     87              USART1_InitStructure.USART_StopBits=USART_StopBits_1;
+     95              USART1_InitStructure.USART_StopBits=USART_StopBits_1;
    \       0x18   0x2000             MOVS     R0,#+0
    \       0x1A   0xF8AD 0x0006      STRH     R0,[SP, #+6]
-     88              USART1_InitStructure.USART_Parity=USART_Parity_No;
+     96              USART1_InitStructure.USART_Parity=USART_Parity_No;
    \       0x1E   0x2000             MOVS     R0,#+0
    \       0x20   0xF8AD 0x0008      STRH     R0,[SP, #+8]
-     89              USART1_InitStructure.USART_Mode=USART_Mode_Tx | USART_Mode_Rx;
+     97              USART1_InitStructure.USART_Mode=USART_Mode_Tx | USART_Mode_Rx;
    \       0x24   0x200C             MOVS     R0,#+12
    \       0x26   0xF8AD 0x000A      STRH     R0,[SP, #+10]
-     90              USART1_InitStructure.USART_HardwareFlowControl=USART_HardwareFlowControl_None;
+     98              USART1_InitStructure.USART_HardwareFlowControl=USART_HardwareFlowControl_None;
    \       0x2A   0x2000             MOVS     R0,#+0
    \       0x2C   0xF8AD 0x000C      STRH     R0,[SP, #+12]
-     91              USART_Init(USART1, &USART1_InitStructure);
+     99              USART_Init(USART1, &USART1_InitStructure);
    \       0x30   0x4669             MOV      R1,SP
    \       0x32   0x0020             MOVS     R0,R4
    \       0x34   0x....'....        BL       USART_Init
-     92             
-     93              // TODO: Enable the USART1 RX interrupts using the function 'USART_ITConfig' and the argument value 'Receive Data register not empty interrupt'
-     94              USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
+    100             
+    101              // TODO: Enable the USART1 RX interrupts using the function 'USART_ITConfig' and the argument value 'Receive Data register not empty interrupt'
+    102              USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
    \       0x38   0x2201             MOVS     R2,#+1
    \       0x3A   0xF240 0x5125      MOVW     R1,#+1317
    \       0x3E   0x0020             MOVS     R0,R4
    \       0x40   0x....'....        BL       USART_ITConfig
-     95          }
+    103          }
    \       0x44   0xBD1F             POP      {R0-R4,PC}       ;; return
-     96          
+    104          
 
    \                                 In section .text, align 2, keep-with-next
-     97          void USART2_Init(void)
-     98          {
+    105          void USART2_Init(void)
+    106          {
    \                     USART2_Init: (+1)
    \        0x0   0xB51F             PUSH     {R0-R4,LR}
-     99              USART_InitTypeDef USART2_InitStructure;
-    100          
-    101              // Enable the USART1 peripheral
-    102              USART_Cmd(USART2, ENABLE);
-   \        0x2   0x....             LDR.N    R4,??DataTable9_3  ;; 0x40004400
+    107              USART_InitTypeDef USART2_InitStructure;
+    108          
+    109              // Enable the USART1 peripheral
+    110              USART_Cmd(USART2, ENABLE);
+   \        0x2   0x....             LDR.N    R4,??DataTable9_4  ;; 0x40004400
    \        0x4   0x2101             MOVS     R1,#+1
    \        0x6   0x0020             MOVS     R0,R4
    \        0x8   0x....'....        BL       USART_Cmd
-    103             
-    104              // TODO: Initialize the USART using the structure 'USART_InitTypeDef' and the function 'USART_Init'
-    105              USART2_InitStructure.USART_BaudRate=9600;
+    111             
+    112              // TODO: Initialize the USART using the structure 'USART_InitTypeDef' and the function 'USART_Init'
+    113              USART2_InitStructure.USART_BaudRate=9600;
    \        0xC   0xF44F 0x5016      MOV      R0,#+9600
    \       0x10   0x9000             STR      R0,[SP, #+0]
-    106              USART2_InitStructure.USART_WordLength=USART_WordLength_8b;
+    114              USART2_InitStructure.USART_WordLength=USART_WordLength_8b;
    \       0x12   0x2000             MOVS     R0,#+0
    \       0x14   0xF8AD 0x0004      STRH     R0,[SP, #+4]
-    107              USART2_InitStructure.USART_StopBits=USART_StopBits_1;
+    115              USART2_InitStructure.USART_StopBits=USART_StopBits_1;
    \       0x18   0x2000             MOVS     R0,#+0
    \       0x1A   0xF8AD 0x0006      STRH     R0,[SP, #+6]
-    108              USART2_InitStructure.USART_Parity=USART_Parity_No;
+    116              USART2_InitStructure.USART_Parity=USART_Parity_No;
    \       0x1E   0x2000             MOVS     R0,#+0
    \       0x20   0xF8AD 0x0008      STRH     R0,[SP, #+8]
-    109              USART2_InitStructure.USART_Mode=USART_Mode_Tx | USART_Mode_Rx;
+    117              USART2_InitStructure.USART_Mode=USART_Mode_Tx | USART_Mode_Rx;
    \       0x24   0x200C             MOVS     R0,#+12
    \       0x26   0xF8AD 0x000A      STRH     R0,[SP, #+10]
-    110              USART2_InitStructure.USART_HardwareFlowControl=USART_HardwareFlowControl_None;
+    118              USART2_InitStructure.USART_HardwareFlowControl=USART_HardwareFlowControl_None;
    \       0x2A   0x2000             MOVS     R0,#+0
    \       0x2C   0xF8AD 0x000C      STRH     R0,[SP, #+12]
-    111              USART_Init(USART2, &USART2_InitStructure);
+    119              USART_Init(USART2, &USART2_InitStructure);
    \       0x30   0x4669             MOV      R1,SP
    \       0x32   0x0020             MOVS     R0,R4
    \       0x34   0x....'....        BL       USART_Init
-    112             
-    113              // TODO: Enable the USART1 RX interrupts using the function 'USART_ITConfig' and the argument value 'Receive Data register not empty interrupt'
-    114              USART_ITConfig(USART2, USART_IT_RXNE, ENABLE);
+    120             
+    121              // TODO: Enable the USART1 RX interrupts using the function 'USART_ITConfig' and the argument value 'Receive Data register not empty interrupt'
+    122              USART_ITConfig(USART2, USART_IT_RXNE, ENABLE);
    \       0x38   0x2201             MOVS     R2,#+1
    \       0x3A   0xF240 0x5125      MOVW     R1,#+1317
    \       0x3E   0x0020             MOVS     R0,R4
    \       0x40   0x....'....        BL       USART_ITConfig
-    115          }
+    123          }
    \       0x44   0xBD1F             POP      {R0-R4,PC}       ;; return
-    116          
+    124          
 
    \                                 In section .text, align 2, keep-with-next
-    117          void NVIC_Configure(void) {
+    125          void NVIC_Configure(void) {
    \                     NVIC_Configure: (+1)
    \        0x0   0xB580             PUSH     {R7,LR}
-    118          
-    119              NVIC_InitTypeDef NVIC_InitStructure;
-    120              
-    121              // TODO: fill the arg you want
-    122              NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
+    126          
+    127              NVIC_InitTypeDef NVIC_InitStructure;
+    128              
+    129              // TODO: fill the arg you want
+    130              NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
    \        0x2   0xF44F 0x60A0      MOV      R0,#+1280
    \        0x6   0x....'....        BL       NVIC_PriorityGroupConfig
-    123          
-    124              // TODO: Initialize the NVIC using the structure 'NVIC_InitTypeDef' and the function 'NVIC_Init'
-    125              
-    126              // UART1
-    127              // 'NVIC_EnableIRQ' is only required for USART setting
-    128              NVIC_EnableIRQ(USART1_IRQn);
+    131          
+    132              // TODO: Initialize the NVIC using the structure 'NVIC_InitTypeDef' and the function 'NVIC_Init'
+    133              
+    134              // UART1
+    135              // 'NVIC_EnableIRQ' is only required for USART setting
+    136              NVIC_EnableIRQ(USART1_IRQn);
    \        0xA   0x2025             MOVS     R0,#+37
    \        0xC   0x....'....        BL       __NVIC_EnableIRQ
-    129              NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
+    137              NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
    \       0x10   0x2025             MOVS     R0,#+37
    \       0x12   0xF88D 0x0000      STRB     R0,[SP, #+0]
-    130              NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1; // TODO
+    138              NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1; // TODO
    \       0x16   0x2001             MOVS     R0,#+1
    \       0x18   0xF88D 0x0001      STRB     R0,[SP, #+1]
-    131              NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1; // TODO
+    139              NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1; // TODO
    \       0x1C   0x2001             MOVS     R0,#+1
    \       0x1E   0xF88D 0x0002      STRB     R0,[SP, #+2]
-    132              NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+    140              NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
    \       0x22   0x2001             MOVS     R0,#+1
    \       0x24   0xF88D 0x0003      STRB     R0,[SP, #+3]
-    133              NVIC_Init(&NVIC_InitStructure);
+    141              NVIC_Init(&NVIC_InitStructure);
    \       0x28   0x4668             MOV      R0,SP
    \       0x2A   0x....'....        BL       NVIC_Init
-    134              
-    135              // UART2
-    136              // 'NVIC_EnableIRQ' is only required for USART setting
-    137              NVIC_EnableIRQ(USART2_IRQn);
+    142              
+    143              // UART2
+    144              // 'NVIC_EnableIRQ' is only required for USART setting
+    145              NVIC_EnableIRQ(USART2_IRQn);
    \       0x2E   0x2026             MOVS     R0,#+38
    \       0x30   0x....'....        BL       __NVIC_EnableIRQ
-    138              NVIC_InitStructure.NVIC_IRQChannel = USART2_IRQn;
+    146              NVIC_InitStructure.NVIC_IRQChannel = USART2_IRQn;
    \       0x34   0x2026             MOVS     R0,#+38
    \       0x36   0xF88D 0x0000      STRB     R0,[SP, #+0]
-    139              NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0; // TODO
+    147              NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0; // TODO
    \       0x3A   0x2000             MOVS     R0,#+0
    \       0x3C   0xF88D 0x0001      STRB     R0,[SP, #+1]
-    140              NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0; // TODO
+    148              NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0; // TODO
    \       0x40   0x2000             MOVS     R0,#+0
    \       0x42   0xF88D 0x0002      STRB     R0,[SP, #+2]
-    141              NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+    149              NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
    \       0x46   0x2001             MOVS     R0,#+1
    \       0x48   0xF88D 0x0003      STRB     R0,[SP, #+3]
-    142              NVIC_Init(&NVIC_InitStructure);
+    150              NVIC_Init(&NVIC_InitStructure);
    \       0x4C   0x4668             MOV      R0,SP
    \       0x4E   0x....'....        BL       NVIC_Init
-    143              
-    144          }
+    151              
+    152          }
    \       0x52   0xBD01             POP      {R0,PC}          ;; return
-    145          
+    153          
 
    \                                 In section .text, align 2, keep-with-next
-    146          void USART1_IRQHandler() {
+    154          void USART1_IRQHandler() {
    \                     USART1_IRQHandler: (+1)
    \        0x0   0xB538             PUSH     {R3-R5,LR}
-    147              uint16_t word;
-    148              if(USART_GetITStatus(USART1,USART_IT_RXNE)!=RESET){
-   \        0x2   0x....             LDR.N    R4,??DataTable9_2  ;; 0x40013800
+    155              uint16_t word;
+    156              if(USART_GetITStatus(USART1,USART_IT_RXNE)!=RESET){
+   \        0x2   0x....             LDR.N    R4,??DataTable9_3  ;; 0x40013800
    \        0x4   0xF240 0x5525      MOVW     R5,#+1317
    \        0x8   0x0029             MOVS     R1,R5
    \        0xA   0x0020             MOVS     R0,R4
    \        0xC   0x....'....        BL       USART_GetITStatus
    \       0x10   0x2800             CMP      R0,#+0
    \       0x12   0xD009             BEQ.N    ??USART1_IRQHandler_0
-    149                  // the most recent received data by the USART1 peripheral
-    150                  word = USART_ReceiveData(USART1);
+    157                  // the most recent received data by the USART1 peripheral
+    158                  word = USART_ReceiveData(USART1);
    \       0x14   0x0020             MOVS     R0,R4
    \       0x16   0x....'....        BL       USART_ReceiveData
-    151          
-    152                  // TODO implement
-    153                  sendDataUART2(word);
+    159          
+    160                  // TODO implement
+    161                  sendDataUART2(word);
    \       0x1A   0xB280             UXTH     R0,R0            ;; ZeroExt  R0,R0,#+16,#+16
    \       0x1C   0x....'....        BL       sendDataUART2
-    154                  
-    155                  // clear 'Read data register not empty' flag
-    156                  USART_ClearITPendingBit(USART1,USART_IT_RXNE);
+    162                  
+    163                  // clear 'Read data register not empty' flag
+    164                  USART_ClearITPendingBit(USART1,USART_IT_RXNE);
    \       0x20   0x0029             MOVS     R1,R5
    \       0x22   0x0020             MOVS     R0,R4
    \       0x24   0x....'....        BL       USART_ClearITPendingBit
-    157              }
-    158          }
+    165              }
+    166          }
    \                     ??USART1_IRQHandler_0: (+1)
    \       0x28   0xBD31             POP      {R0,R4,R5,PC}    ;; return
-    159          
+    167          
 
    \                                 In section .text, align 2, keep-with-next
-    160          void USART2_IRQHandler() {
+    168          void USART2_IRQHandler() {
    \                     USART2_IRQHandler: (+1)
    \        0x0   0xB538             PUSH     {R3-R5,LR}
-    161              uint16_t word;
-    162              if(USART_GetITStatus(USART2,USART_IT_RXNE)!=RESET){
-   \        0x2   0x....             LDR.N    R4,??DataTable9_3  ;; 0x40004400
+    169              uint16_t word;
+    170              if(USART_GetITStatus(USART2,USART_IT_RXNE)!=RESET){
+   \        0x2   0x....             LDR.N    R4,??DataTable9_4  ;; 0x40004400
    \        0x4   0xF240 0x5525      MOVW     R5,#+1317
    \        0x8   0x0029             MOVS     R1,R5
    \        0xA   0x0020             MOVS     R0,R4
    \        0xC   0x....'....        BL       USART_GetITStatus
    \       0x10   0x2800             CMP      R0,#+0
    \       0x12   0xD009             BEQ.N    ??USART2_IRQHandler_0
-    163                  // the most recent received data by the USART1 peripheral
-    164                  word = USART_ReceiveData(USART2);
+    171                  // the most recent received data by the USART1 peripheral
+    172                  word = USART_ReceiveData(USART2);
    \       0x14   0x0020             MOVS     R0,R4
    \       0x16   0x....'....        BL       USART_ReceiveData
-    165          
-    166                  // TODO implement
-    167                  sendDataUART1(word);
+    173          
+    174                  // TODO implement
+    175                  sendDataUART1(word);
    \       0x1A   0xB280             UXTH     R0,R0            ;; ZeroExt  R0,R0,#+16,#+16
    \       0x1C   0x....'....        BL       sendDataUART1
-    168                  
-    169                  // clear 'Read data register not empty' flag
-    170                  USART_ClearITPendingBit(USART2,USART_IT_RXNE);
+    176                  
+    177                  // clear 'Read data register not empty' flag
+    178                  USART_ClearITPendingBit(USART2,USART_IT_RXNE);
    \       0x20   0x0029             MOVS     R1,R5
    \       0x22   0x0020             MOVS     R0,R4
    \       0x24   0x....'....        BL       USART_ClearITPendingBit
-    171              }
-    172          }
+    179              }
+    180          }
    \                     ??USART2_IRQHandler_0: (+1)
    \       0x28   0xBD31             POP      {R0,R4,R5,PC}    ;; return
-    173          
-    174          
+    181          
+    182          
 
    \                                 In section .text, align 2, keep-with-next
-    175          void Delay(void) {
-    176             int i;
-    177             for (i = 0; i < 2000000; i++) {}
+    183          void Delay(void) {
+    184             int i;
+    185             for (i = 0; i < 2000000; i++) {}
    \                     Delay: (+1)
    \        0x0   0x2000             MOVS     R0,#+0
    \        0x2   0xE000             B.N      ??Delay_0
    \                     ??Delay_1: (+1)
    \        0x4   0x1C40             ADDS     R0,R0,#+1
    \                     ??Delay_0: (+1)
-   \        0x6   0x....             LDR.N    R1,??DataTable9_4  ;; 0x1e8480
+   \        0x6   0x....             LDR.N    R1,??DataTable9_5  ;; 0x1e8480
    \        0x8   0x4288             CMP      R0,R1
    \        0xA   0xDBFB             BLT.N    ??Delay_1
-    178          }
+    186          }
    \        0xC   0x4770             BX       LR               ;; return
-    179          
+    187          
 
    \                                 In section .text, align 2, keep-with-next
-    180          void sendDataUART1(uint16_t data) {
+    188          void sendDataUART1(uint16_t data) {
    \                     sendDataUART1: (+1)
    \        0x0   0xB510             PUSH     {R4,LR}
    \        0x2   0x0001             MOVS     R1,R0
-    181             USART_SendData(USART1, data);
-   \        0x4   0x....             LDR.N    R4,??DataTable9_2  ;; 0x40013800
+    189             USART_SendData(USART1, data);
+   \        0x4   0x....             LDR.N    R4,??DataTable9_3  ;; 0x40013800
    \        0x6   0xB289             UXTH     R1,R1            ;; ZeroExt  R1,R1,#+16,#+16
    \        0x8   0x0020             MOVS     R0,R4
    \        0xA   0x....'....        BL       USART_SendData
-    182             while ((USART1->SR & USART_SR_TC) == 0);
+    190             while ((USART1->SR & USART_SR_TC) == 0);
    \                     ??sendDataUART1_0: (+1)
    \        0xE   0x8820             LDRH     R0,[R4, #+0]
    \       0x10   0x0640             LSLS     R0,R0,#+25
    \       0x12   0xD5FC             BPL.N    ??sendDataUART1_0
-    183          }
+    191          }
    \       0x14   0xBD10             POP      {R4,PC}          ;; return
-    184          
+    192          
 
    \                                 In section .text, align 2, keep-with-next
-    185          void sendDataUART2(uint16_t data) {
+    193          void sendDataUART2(uint16_t data) {
    \                     sendDataUART2: (+1)
    \        0x0   0xB510             PUSH     {R4,LR}
    \        0x2   0x0001             MOVS     R1,R0
-    186             USART_SendData(USART2, data);
-   \        0x4   0x....             LDR.N    R4,??DataTable9_3  ;; 0x40004400
+    194             USART_SendData(USART2, data);
+   \        0x4   0x....             LDR.N    R4,??DataTable9_4  ;; 0x40004400
    \        0x6   0xB289             UXTH     R1,R1            ;; ZeroExt  R1,R1,#+16,#+16
    \        0x8   0x0020             MOVS     R0,R4
    \        0xA   0x....'....        BL       USART_SendData
-    187             while ((USART2->SR & USART_SR_TC) == 0);
+    195             while ((USART2->SR & USART_SR_TC) == 0);
    \                     ??sendDataUART2_0: (+1)
    \        0xE   0x8820             LDRH     R0,[R4, #+0]
    \       0x10   0x0640             LSLS     R0,R0,#+25
    \       0x12   0xD5FC             BPL.N    ??sendDataUART2_0
-    188          }
+    196          }
    \       0x14   0xBD10             POP      {R4,PC}          ;; return
-    189          
+    197          
 
    \                                 In section .rodata, align 4
-    190          const char msg[] = "Hello Team07\r\n";
+    198          const char msg[] = "Hello Team07\r\n";
    \                     msg:
    \        0x0   0x48 0x65          DC8 "Hello Team07\015\012"
 
@@ -495,59 +515,63 @@ C:\Users\tykr0\Desktop\termProject_controller\user\main.c
 
    \              0x00
    \        0xF                      DS8 1
-    191          
+    199          
 
    \                                 In section .text, align 2, keep-with-next
-    192          int main(void)
-    193          {
+    200          int main(void)
+    201          {
    \                     main: (+1)
-   \        0x0   0xB538             PUSH     {R3-R5,LR}
-    194              SystemInit();
+   \        0x0   0xB510             PUSH     {R4,LR}
+    202              SystemInit();
    \        0x2   0x....'....        BL       SystemInit
-    195              RCC_Configure();
+    203              RCC_Configure();
    \        0x6   0x....'....        BL       RCC_Configure
-    196              GPIO_Configure();
+    204              GPIO_Configure();
    \        0xA   0x....'....        BL       GPIO_Configure
-    197              USART1_Init();
-   \        0xE   0x....'....        BL       USART1_Init
-    198              USART2_Init();
-   \       0x12   0x....'....        BL       USART2_Init
-    199              NVIC_Configure();
-   \       0x16   0x....'....        BL       NVIC_Configure
-    200              
-    201              
-    202             int i=0;
-   \       0x1A   0x2400             MOVS     R4,#+0
-    203             while (1) {
-    204                  // TODO: implement
-    205                  sendDataUART1(msg[i]);
+    205              //USART1_Init();
+    206              //USART2_Init();
+    207              //NVIC_Configure();
+    208              
+    209              
+    210             int i=0;
+   \        0xE   0x2000             MOVS     R0,#+0
+    211             while (1) {
+    212                  /*
+    213                  // TODO: implement
+    214                  sendDataUART1(msg[i]);
+    215                  sendDataUART2(msg[i]);
+    216                  //sendDataUART2(msg[i]);
+    217                  ++i;
+    218                  if(i==14) i=0;
+    219                  // Delay
+    220                  Delay();
+    221                  */
+    222                  GPIO_ResetBits(GPIOC, GPIO_Pin_13);
    \                     ??main_0: (+1)
-   \       0x1C   0x....             LDR.N    R5,??DataTable9_5
-   \       0x1E   0x5D28             LDRB     R0,[R5, R4]
-   \       0x20   0xB280             UXTH     R0,R0            ;; ZeroExt  R0,R0,#+16,#+16
-   \       0x22   0x....'....        BL       sendDataUART1
-    206                  sendDataUART2(msg[i]);
-   \       0x26   0x5D28             LDRB     R0,[R5, R4]
-   \       0x28   0xB280             UXTH     R0,R0            ;; ZeroExt  R0,R0,#+16,#+16
-   \       0x2A   0x....'....        BL       sendDataUART2
-    207                  //sendDataUART2(msg[i]);
-    208                  ++i;
-   \       0x2E   0x1C64             ADDS     R4,R4,#+1
-    209                  if(i==14) i=0;
-   \       0x30   0x2C0E             CMP      R4,#+14
-   \       0x32   0xD100             BNE.N    ??main_1
-   \       0x34   0x2400             MOVS     R4,#+0
-    210                  // Delay
-    211                  Delay();
-   \                     ??main_1: (+1)
-   \       0x36   0x....'....        BL       Delay
-   \       0x3A   0xE7EF             B.N      ??main_0
-    212              }
-    213              
-    214              return 0;
+   \       0x10   0x....             LDR.N    R4,??DataTable9_2  ;; 0x40011000
+   \       0x12   0xF44F 0x5100      MOV      R1,#+8192
+   \       0x16   0x0020             MOVS     R0,R4
+   \       0x18   0x....'....        BL       GPIO_ResetBits
+    223                  Delay();
+   \       0x1C   0x....'....        BL       Delay
+    224                  GPIO_SetBits(GPIOC, GPIO_Pin_13);
+   \       0x20   0xF44F 0x5100      MOV      R1,#+8192
+   \       0x24   0x0020             MOVS     R0,R4
+   \       0x26   0x....'....        BL       GPIO_SetBits
+    225                  Delay();
+   \       0x2A   0x....'....        BL       Delay
+   \       0x2E   0xE7EF             B.N      ??main_0
+    226              }
+    227              
+    228              return 0;
                      ^
 Warning[Pe111]: statement is unreachable
-    215          }
+
+     int i=0;
+         ^
+"C:\Users\tykr0\Desktop\termProject_controller\user\main.c",210  Warning[Pe177]: 
+          variable "i" was declared but never referenced
+    229          }
 
    \                                 In section .text, align 4, keep-with-next
    \                     ??DataTable9:
@@ -559,19 +583,19 @@ Warning[Pe111]: statement is unreachable
 
    \                                 In section .text, align 4, keep-with-next
    \                     ??DataTable9_2:
-   \        0x0   0x4001'3800        DC32     0x40013800
+   \        0x0   0x4001'1000        DC32     0x40011000
 
    \                                 In section .text, align 4, keep-with-next
    \                     ??DataTable9_3:
-   \        0x0   0x4000'4400        DC32     0x40004400
+   \        0x0   0x4001'3800        DC32     0x40013800
 
    \                                 In section .text, align 4, keep-with-next
    \                     ??DataTable9_4:
-   \        0x0   0x001E'8480        DC32     0x1e8480
+   \        0x0   0x4000'4400        DC32     0x40004400
 
    \                                 In section .text, align 4, keep-with-next
    \                     ??DataTable9_5:
-   \        0x0   0x....'....        DC32     msg
+   \        0x0   0x001E'8480        DC32     0x1e8480
 
    Maximum stack usage in bytes:
 
@@ -606,16 +630,13 @@ Warning[Pe111]: statement is unreachable
         24   -> USART_ITConfig
         24   -> USART_Init
        0   __NVIC_EnableIRQ
-      16   main
-        16   -> Delay
-        16   -> GPIO_Configure
-        16   -> NVIC_Configure
-        16   -> RCC_Configure
-        16   -> SystemInit
-        16   -> USART1_Init
-        16   -> USART2_Init
-        16   -> sendDataUART1
-        16   -> sendDataUART2
+       8   main
+         8   -> Delay
+         8   -> GPIO_Configure
+         8   -> GPIO_ResetBits
+         8   -> GPIO_SetBits
+         8   -> RCC_Configure
+         8   -> SystemInit
        8   sendDataUART1
          8   -> USART_SendData
        8   sendDataUART2
@@ -633,25 +654,25 @@ Warning[Pe111]: statement is unreachable
        4  ??DataTable9_4
        4  ??DataTable9_5
       14  Delay
-     114  GPIO_Configure
+     142  GPIO_Configure
       84  NVIC_Configure
-      40  RCC_Configure
+      48  RCC_Configure
       42  USART1_IRQHandler
       70  USART1_Init
       42  USART2_IRQHandler
       70  USART2_Init
       28  __NVIC_EnableIRQ
-      60  main
+      48  main
       16  msg
       22  sendDataUART1
       22  sendDataUART2
 
  
   16 bytes in section .rodata
- 632 bytes in section .text
+ 656 bytes in section .text
  
- 632 bytes of CODE  memory
+ 656 bytes of CODE  memory
   16 bytes of CONST memory
 
 Errors: none
-Warnings: 1
+Warnings: 2

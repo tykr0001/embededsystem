@@ -8,7 +8,7 @@
 
 --device_macro="H:\Program Files\IAR Systems\Embedded Workbench 8.4\arm\config\debugger\ST\STM32F1xx.dmac" 
 
---flash_loader="H:\Program Files\IAR Systems\Embedded Workbench 8.4\arm\config\flashloader\ST\FlashSTM32F10xxB.board" 
+--flash_loader="H:\Program Files\IAR Systems\Embedded Workbench 8.4\arm\config\flashloader\ST\FlashSTM32F10xx8.board" 
 
 
 

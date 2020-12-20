@@ -35,6 +35,7 @@ void RCC_Configure(void) {
     // ADC
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);
     
     // DMA
@@ -60,11 +61,17 @@ void GPIO_Configure(void) {
 
     // TODO: Initialize the GPIO pins using the structure 'GPIO_InitTypeDef' and the function 'GPIO_Init'
 
-    // ADC12_IN0, IN1, IN4, IN5, IN6, 
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7 ;
+    // ADC12_IN4, IN5, IN6 
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_6;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AIN;
     GPIO_Init(GPIOA, &GPIO_InitStructure);
+    
+    // ADC12_IN10, IN11
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AIN;
+    GPIO_Init(GPIOC, &GPIO_InitStructure);
     
     // TIM2_CH2
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1;
@@ -113,8 +120,8 @@ void ADC_Configure(void) {
     ADC_Init(ADC1, &ADC_InitStructure);
 
     // flex Sensor
-    ADC_RegularChannelConfig(ADC1, ADC_Channel_0, 1, ADC_SampleTime_71Cycles5);
-    ADC_RegularChannelConfig(ADC1, ADC_Channel_7, 2, ADC_SampleTime_71Cycles5);
+    ADC_RegularChannelConfig(ADC1, ADC_Channel_10, 1, ADC_SampleTime_71Cycles5);
+    ADC_RegularChannelConfig(ADC1, ADC_Channel_11, 2, ADC_SampleTime_71Cycles5);
     
     // 3-axis Acceleration Sensor
     ADC_RegularChannelConfig(ADC1, ADC_Channel_4, 3, ADC_SampleTime_71Cycles5);
@@ -286,7 +293,7 @@ void USART2_IRQHandler() {
 
 void Delay(){
    int i;
-   for (i = 0; i < 2000000; i++) {}
+   for (i = 0; i < 200000; i++) {}
 }
 
 void sendDataUART1(uint16_t data) {
@@ -309,7 +316,6 @@ void sendU32DataUART2(uint32_t data) {
     sendDataUART2(data / 10 + '0');
     data %= 10;
     sendDataUART2(data + '0');
-    sendDataUART2('\n');
 }
 
 const char msg[] = "Hello Team07\r\n";
@@ -332,8 +338,13 @@ int main(void)
         sendDataUART2('-');
         sendDataUART2('\n');
         sendU32DataUART2(ADC_Value[0]);
+        sendDataUART2(' ');
+        sendDataUART2('F');
         sendU32DataUART2(ADC_Value[1]);
+        sendDataUART2('Z');
+        sendDataUART2('A');
         sendU32DataUART2(ADC_Value[2]);
+        sendDataUART2('Y');
         sendU32DataUART2(ADC_Value[3]);
         sendU32DataUART2(ADC_Value[4]);
         //sendU32DataUART2(flex_Sensor[1]);

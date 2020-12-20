@@ -1,4 +1,4 @@
-//Controller
+//Controller stm32f103c8t6 board
 
 #include "stm32f10x.h"
 #include "stm32f10x_exti.h"
@@ -36,7 +36,8 @@ void RCC_Configure(void)
     /* USART2 clock enable */
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2,ENABLE);
      
-    
+    // programming mode test
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC,ENABLE);
 }
 
 void GPIO_Configure(void)
@@ -71,6 +72,13 @@ void GPIO_Configure(void)
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
     GPIO_Init(GPIOA, &GPIO_InitStructure);
+    
+    // programming mode test
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+    GPIO_Init(GPIOC, &GPIO_InitStructure);
+
     
 }
 
@@ -194,13 +202,14 @@ int main(void)
     SystemInit();
     RCC_Configure();
     GPIO_Configure();
-    USART1_Init();
-    USART2_Init();
-    NVIC_Configure();
+    //USART1_Init();
+    //USART2_Init();
+    //NVIC_Configure();
     
     
    int i=0;
    while (1) {
+        /*
         // TODO: implement
         sendDataUART1(msg[i]);
         sendDataUART2(msg[i]);
@@ -208,6 +217,11 @@ int main(void)
         ++i;
         if(i==14) i=0;
         // Delay
+        Delay();
+        */
+        GPIO_ResetBits(GPIOC, GPIO_Pin_13);
+        Delay();
+        GPIO_SetBits(GPIOC, GPIO_Pin_13);
         Delay();
     }
     

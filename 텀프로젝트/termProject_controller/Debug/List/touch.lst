@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V8.50.6.265/W32 for ARM         06/Dec/2020  17:24:45
+# IAR ANSI C/C++ Compiler V8.50.6.265/W32 for ARM         20/Dec/2020  16:37:42
 # Copyright 1999-2020 IAR Systems AB.
 #
 #    Cpu mode                        
@@ -8,7 +8,7 @@
 #    Source file                  =
 #        C:\Users\tykr0\Desktop\termProject_controller\Libraries\LCD\touch.c
 #    Command line                 =
-#        -f C:\Users\tykr0\AppData\Local\Temp\EW4746.tmp
+#        -f C:\Users\tykr0\AppData\Local\Temp\EWD5C.tmp
 #        (C:\Users\tykr0\Desktop\termProject_controller\Libraries\LCD\touch.c
 #        -D USE_STDPERIPH_DRIVER -D STM32F10X_CL -lC
 #        C:\Users\tykr0\Desktop\termProject_controller\Debug\List -o
