@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V8.50.6.265/W32 for ARM         19/Dec/2020  17:58:39
+# IAR ANSI C/C++ Compiler V8.50.6.265/W32 for ARM         20/Dec/2020  17:23:20
 # Copyright 1999-2020 IAR Systems AB.
 #
 #    Cpu mode             
@@ -8,7 +8,7 @@
 #    Source file       =
 #        C:\Users\tykr0\Desktop\termProject_controller2\user\main.c
 #    Command line      =
-#        -f C:\Users\tykr0\AppData\Local\Temp\EWD2C0.tmp
+#        -f C:\Users\tykr0\AppData\Local\Temp\EWD586.tmp
 #        (C:\Users\tykr0\Desktop\termProject_controller2\user\main.c -D
 #        USE_STDPERIPH_DRIVER -D STM32F10X_CL -lC
 #        C:\Users\tykr0\Desktop\termProject_controller2\Debug\List -o
@@ -163,8 +163,8 @@ C:\Users\tykr0\Desktop\termProject_controller2\user\main.c
      61              // TODO: Initialize the GPIO pins using the structure 'GPIO_InitTypeDef' and the function 'GPIO_Init'
      62          
      63              // ADC12_IN0, IN1, IN4, IN5, IN6, 
-     64              GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_6;
-   \        0x2   0x2073             MOVS     R0,#+115
+     64              GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7 ;
+   \        0x2   0x20F1             MOVS     R0,#+241
    \        0x4   0xF8AD 0x0000      STRH     R0,[SP, #+0]
      65              GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
    \        0x8   0x2003             MOVS     R0,#+3
@@ -298,10 +298,10 @@ C:\Users\tykr0\Desktop\termProject_controller2\user\main.c
    \       0x32   0x2100             MOVS     R1,#+0
    \       0x34   0x0020             MOVS     R0,R4
    \       0x36   0x....'....        BL       ADC_RegularChannelConfig
-    117              ADC_RegularChannelConfig(ADC1, ADC_Channel_1, 2, ADC_SampleTime_71Cycles5);
+    117              ADC_RegularChannelConfig(ADC1, ADC_Channel_7, 2, ADC_SampleTime_71Cycles5);
    \       0x3A   0x2306             MOVS     R3,#+6
    \       0x3C   0x2202             MOVS     R2,#+2
-   \       0x3E   0x2101             MOVS     R1,#+1
+   \       0x3E   0x2107             MOVS     R1,#+7
    \       0x40   0x0020             MOVS     R0,R4
    \       0x42   0x....'....        BL       ADC_RegularChannelConfig
     118              
