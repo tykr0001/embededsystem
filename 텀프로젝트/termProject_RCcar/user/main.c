@@ -1,3 +1,5 @@
+// RCcar
+
 #include "stm32f10x.h"
 #include "core_cm3.h"
 #include "misc.h"
@@ -123,10 +125,10 @@ void ADC_Configure(void) {
     ADC_Cmd(ADC1, ENABLE);
 
     ADC_ResetCalibration(ADC1);
-    while (ADC_GetResetCalibrationStatus(ADC1)); //->while ?¬ìš©?˜ì—¬ Òú´í¬
+    while (ADC_GetResetCalibrationStatus(ADC1)); //->while ?¡þi?¨Ï??i?¡þ Ou¢¥i?¡þ
 
     ADC_StartCalibration(ADC1);
-    while (ADC_GetCalibrationStatus(ADC1)); //->while ?¬ìš©?˜ì—¬ Òú´í¬
+    while (ADC_GetCalibrationStatus(ADC1)); //->while ?¡þi?¨Ï??i?¡þ Ou¢¥i?¡þ
 
     ADC_SoftwareStartConvCmd(ADC1, ENABLE);
 }
@@ -232,7 +234,6 @@ int main(void)
         /*
         // TODO: implement
         int illuminance = ADC_Value[0];
-
         if (illuminance > 300) {
             if (Prev_Value <= 300)
                 LCD_Clear(GRAY);

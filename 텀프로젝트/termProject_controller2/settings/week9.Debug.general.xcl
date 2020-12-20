@@ -1,0 +1,15 @@
+"H:\Program Files\IAR Systems\Embedded Workbench 8.4\arm\bin\armproc.dll" 
+
+"H:\Program Files\IAR Systems\Embedded Workbench 8.4\arm\bin\armjlink2.dll" 
+
+"C:\Users\tykr0\Desktop\termProject_controller2\Debug\Exe\week9.out" 
+
+--plugin="H:\Program Files\IAR Systems\Embedded Workbench 8.4\arm\bin\armbat.dll" 
+
+--device_macro="H:\Program Files\IAR Systems\Embedded Workbench 8.4\arm\config\debugger\ST\STM32F1xx.dmac" 
+
+--flash_loader="H:\Program Files\IAR Systems\Embedded Workbench 8.4\arm\config\flashloader\ST\FlashSTM32F105xC.board" 
+
+
+
+
